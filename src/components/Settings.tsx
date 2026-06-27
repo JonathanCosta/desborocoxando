@@ -1,9 +1,13 @@
 import { useState, useRef } from 'react';
-import { Download, Upload, ChevronRight, Share2, X } from 'lucide-react';
+import { Download, Upload, ChevronRight, Share2, X, Beaker } from 'lucide-react';
 import { useBackup } from '../hooks/useBackup';
 import { usePWA } from '../hooks/usePWA';
 
-export default function Settings() {
+interface SettingsProps {
+  populateMockData?: () => void;
+}
+
+export default function Settings({ populateMockData }: SettingsProps) {
   const { exportData, importData } = useBackup();
   const { isIOS, triggerInstall, canInstall } = usePWA();
   const [showInstallModal, setShowInstallModal] = useState(false);
@@ -81,6 +85,28 @@ export default function Settings() {
           </div>
           <ChevronRight className="w-5 h-5" />
         </button>
+      )}
+
+      {/* Dev-only: Popular Dados de Teste */}
+      {import.meta.env.DEV && populateMockData && (
+        <>
+          <hr className="border-t border-dashed border-[#C496A1]/30 my-4" />
+          <button
+            onClick={() => {
+              if (window.confirm('Gerar 365 dias de dados de teste? Isso substituirá todos os dados existentes.')) {
+                populateMockData();
+              }
+            }}
+            className="w-full flex items-center justify-between p-4 bg-[#C496A1]/10 rounded-xl border border-dashed border-[#C496A1]/40 text-[#C496A1] font-medium active:scale-95 transition-all duration-300 ease-in-out"
+            aria-label="Popular dados de teste"
+          >
+            <div className="flex items-center gap-3">
+              <Beaker className="w-5 h-5" />
+              <span>Popular Dados de Teste</span>
+            </div>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </>
       )}
 
       {/* PWA Install Modal */}

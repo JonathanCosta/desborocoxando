@@ -3,6 +3,7 @@ import type { AppDatabase, DailyRecord } from '../types';
 import { emptyRecord } from '../types';
 import { today } from '../utils/dateUtils';
 import { AppDatabaseSchema } from '../schemas';
+import { generateMockData } from '../utils/populateMockData';
 
 const STORAGE_KEY = 'desborocoxando_data';
 
@@ -49,5 +50,10 @@ export function useAppData() {
     });
   }, [selectedDate]);
 
-  return { db, selectedDate, setSelectedDate, getCurrentRecord, updateRecord };
+  const populateMockData = useCallback(() => {
+    const mockData = generateMockData();
+    setDb(mockData);
+  }, []);
+
+  return { db, selectedDate, setSelectedDate, getCurrentRecord, updateRecord, populateMockData };
 }

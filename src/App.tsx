@@ -17,7 +17,7 @@ const tabs: { id: Tab; label: string; icon: typeof Droplets }[] = [
 
 function App() {
   const [activeTab, setActiveTab] = useState<Tab>('dashboard')
-  const { db, selectedDate, setSelectedDate, getCurrentRecord, updateRecord } = useAppData()
+  const { db, selectedDate, setSelectedDate, getCurrentRecord, updateRecord, populateMockData } = useAppData()
 
   const handleSelectDate = useCallback((date: string) => {
     setSelectedDate(date)
@@ -55,7 +55,7 @@ function App() {
         {activeTab === 'analytics' && (
           <Analytics db={db} />
         )}
-        {activeTab === 'settings' && <Settings />}
+        {activeTab === 'settings' && <Settings populateMockData={populateMockData} />}
       </main>
 
       {/* Bottom navigation */}
