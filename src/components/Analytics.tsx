@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Scale } from 'lucide-react';
 import { subDays, format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import {
   LineChart,
   Line,
@@ -19,23 +20,41 @@ import {
 import type { AppDatabase } from '../types';
 import { today, normalizeDate } from '../utils/dateUtils';
 
-type Range = 7 | 30 | 365;
+type Range = '7days' | '30days';
 
 interface AnalyticsProps {
   db: AppDatabase;
 }
 
 const ranges: { label: string; value: Range }[] = [
-  { label: '7 Dias', value: 7 },
-  { label: '30 Dias', value: 30 },
-  { label: '1 Ano', value: 365 },
+  { label: '7 Dias', value: '7days' },
+  { label: '30 Dias', value: '30days' },
 ];
 
+function HabitTooltip({ active, payload }: { active?: boolean; payload?: Array<{ payload: { meds: boolean; care: boolean; exercise: boolean } }> }) {
+  if (!active || !payload?.length) return null;
+  const { meds, care, exercise } = payload[0].payload;
+  const habitsDone = [
+    meds && 'Remédios',
+    care && 'Care',
+    exercise && 'Exercício',
+  ].filter(Boolean);
+  return (
+    <div className="bg-[#F7F5F0] border border-[#EBE1C6] rounded-lg p-2 text-xs text-[#81785A] shadow-sm">
+      {habitsDone.length > 0
+        ? `Hábitos concluídos: ${habitsDone.join(', ')}`
+        : 'Nenhum hábito registrado'}
+    </div>
+  );
+}
+
 export default function Analytics({ db }: AnalyticsProps) {
-  const [range, setRange] = useState<Range>(7);
+  const [range, setRange] = useState<Range>('7days');
+
+  const RANGE_TO_DAYS: Record<Range, number> = { '7days': 7, '30days': 30 };
 
   const endDate = today();
-  const startDate = normalizeDate(subDays(new Date(), range));
+  const startDate = normalizeDate(subDays(new Date(), RANGE_TO_DAYS[range]));
 
   const entries = useMemo(
     () =>
@@ -48,9 +67,12 @@ export default function Analytics({ db }: AnalyticsProps) {
   const chartData = useMemo(
     () =>
       entries.map(([date, record]) => ({
-        date: format(new Date(date), 'dd/MM'),
+        date: format(new Date(date), 'dd/MM', { locale: ptBR }),
         weight: record.weight,
         water: record.water,
+        meds: record.meds.done,
+        care: record.care.done,
+        exercise: record.exercise.done,
         habits:
           (record.meds.done ? 1 : 0) +
           (record.care.done ? 1 : 0) +
@@ -132,6 +154,8 @@ export default function Analytics({ db }: AnalyticsProps) {
                 <Line
                   type="monotone"
                   dataKey="weight"
+                  connectNulls={true}
+                  name="Peso"
                   stroke="#C496A1"
                   strokeWidth={3}
                   dot={{ r: 4, fill: '#C496A1' }}
@@ -197,7 +221,7 @@ export default function Analytics({ db }: AnalyticsProps) {
                   position: 'right',
                 }}
               />
-              <Bar dataKey="water" radius={[8, 8, 0, 0]}>
+              <Bar dataKey="water" name="Água" radius={[8, 8, 0, 0]}>
                 {chartData.map((_, index) => (
                   <Cell
                     key={index}
@@ -237,17 +261,11 @@ export default function Analytics({ db }: AnalyticsProps) {
                 domain={[0, 3]}
                 ticks={[0, 1, 2, 3]}
               />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: '#F7F5F0',
-                  border: '1px solid #EBE1C6',
-                  borderRadius: '8px',
-                  fontSize: '12px',
-                }}
-              />
+              <Tooltip content={<HabitTooltip />} />
               <Area
                 type="monotone"
                 dataKey="habits"
+                name="Hábitos"
                 stroke="#8E88A3"
                 fill="#8E88A3"
                 fillOpacity={0.3}
