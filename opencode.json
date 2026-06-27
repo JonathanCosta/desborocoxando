@@ -1,0 +1,80 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "coordinator",
+  "references": {
+    "docs": {
+      "path": "docs",
+      "description": "Blueprints de frontend e execução, logos e assets do Desborocoxando"
+    }
+  },
+  "permission": {
+    "edit": "allow",
+    "webfetch": "ask",
+    "websearch": "deny",
+    "bash": {
+      "rm -rf *": "deny",
+      "rm -rf": "deny",
+      "sudo *": "deny",
+      "npx *": "allow",
+      "npm *": "allow",
+      "node *": "allow",
+      "vite *": "allow",
+      "vitest *": "allow",
+      "tsc *": "allow",
+      "eslint *": "allow",
+      "*": "ask"
+    },
+    "external_directory": {
+      "~/.config/opencode/**": "deny",
+      "*": "ask"
+    }
+  },
+  "agent": {
+    "ui-engineer": {
+      "description": "Especialista em JSX, Tailwind CSS e Lucide Icons. Constrói componentes visuais e animações.",
+      "mode": "subagent",
+      "permission": { "edit": "allow", "bash": { "npx *": "allow", "*": "deny" } }
+    },
+    "state-engineer": {
+      "description": "Especialista em hooks React, estado global, localStorage e lógica de dados. Não cria componentes visuais.",
+      "mode": "subagent",
+      "permission": { "edit": "allow", "bash": { "npx *": "allow", "*": "deny" } }
+    },
+    "pwa-expert": {
+      "description": "Especialista em PWA, Service Worker, vite-plugin-pwa, manifesto e detecção iOS/Android.",
+      "mode": "subagent",
+      "permission": { "edit": "allow", "bash": { "npm *": "allow", "npx *": "allow", "*": "deny" } }
+    },
+    "qa-tester": {
+      "description": "Especialista em Vitest. Cria e executa testes unitários de hooks, componentes e utils.",
+      "mode": "subagent",
+      "permission": { "edit": "allow", "bash": { "vitest *": "allow", "npx *": "allow", "*": "deny" } }
+    },
+    "sec-reviewer": {
+      "description": "Auditor de segurança e tipagem. Verifica TypeScript strict, XSS em localStorage, e aderência aos limites arquiteturais.",
+      "mode": "subagent",
+      "permission": { "edit": "deny", "bash": { "tsc *": "allow", "eslint *": "allow", "npm audit *": "allow", "*": "deny" } }
+    },
+    "git-manager": {
+      "description": "Guardião do repositório — valida gitignore, executa commits semânticos, gerencia branches e releases com varredura de segurança.",
+      "mode": "subagent",
+      "permission": {
+        "edit": "allow",
+        "bash": {
+          "git init": "allow",
+          "git add *": "allow",
+          "git commit *": "allow",
+          "git push": "allow",
+          "git status": "allow",
+          "git log *": "allow",
+          "git diff *": "allow",
+          "git checkout *": "allow",
+          "git branch *": "allow",
+          "git remote *": "allow",
+          "*git push --force*": "deny",
+          "*": "ask"
+        }
+      }
+    }
+  }
+}

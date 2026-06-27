@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  @keyframes balancoGarrafa {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg) scale(1.02); }
+    50% { transform: rotate(4deg) scale(0.98); }
+    75% { transform: rotate(-2deg); }
+  }
+  .animate-garrafa-balanco {
+    animation: balancoGarrafa 600ms ease-in-out;
+  }
+  .bg-floral-gradient {
+    background: linear-gradient(135deg, #F7F5F0 0%, #EBE1C6 100%);
+  }
+}
