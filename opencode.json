@@ -75,6 +75,21 @@
           "*": "ask"
         }
       }
+    },
+    "devops-engineer": {
+      "description": "Engenheiro de CI/CD — configura GitHub Actions, ajusta base path do Vite e valida build de produção.",
+      "mode": "subagent",
+      "permission": {
+        "edit": "allow",
+        "bash": {
+          "npm *": "allow",
+          "npx *": "allow",
+          "git add *": "allow",
+          "git commit *": "allow",
+          "git push": "allow",
+          "*": "ask"
+        }
+      }
     }
   }
 }
