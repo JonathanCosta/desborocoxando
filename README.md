@@ -7,14 +7,15 @@
 
   <!-- Badges -->
   <p>
+    <a href="https://github.com/JonathanCosta/desborocoxando/actions"><img src="https://github.com/JonathanCosta/desborocoxando/actions/workflows/deploy.yml/badge.svg" alt="Build Status"></a>
     <img src="https://img.shields.io/badge/React-18-blue?logo=react" alt="React 18">
     <img src="https://img.shields.io/badge/Vite-5-purple?logo=vite" alt="Vite 5">
     <img src="https://img.shields.io/badge/100%25-Offline-success" alt="100% Offline">
     <img src="https://img.shields.io/badge/PWA-Pronto-ff69b4" alt="PWA Pronto">
   </p>
 
-  <h3 align="center">
-    <em>🔗 Link de produção — configure o remote do GitHub e substitua aqui</em>
+  <h3>
+    <a href="https://jonathancosta.github.io/desborocoxando/">🚀 Acessar o Aplicativo Ao Vivo</a>
   </h3>
 </div>
 
