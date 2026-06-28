@@ -19,7 +19,7 @@ mode: subagent
 ## Regras
 
 - Nome do app: "Desborocoxando"
-- Background: `#F7F5F0`, Theme: `#C496A1`
+- Background: `#f7e1e3`, Theme: `#c47590`
 - Ícones em `docs/pwaicons/` → copiar para `public/`
 - Estratégia: `generateSW` com cache offline
 - iOS: instruções visuais (sem botão automático)

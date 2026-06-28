@@ -71,28 +71,28 @@ function CalendarView({ db, selectedDate, onSelectDate }: CalendarViewProps) {
           type="button"
           onClick={prevMonth}
           aria-label="Mês anterior"
-          className="p-1 text-[#81785A] hover:text-[#C496A1] transition-colors duration-300 active:scale-95"
+          className="p-1 text-[#922d4d] hover:text-[#c47590] transition-colors duration-300 active:scale-95"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
-        <span className="text-[#81785A] font-semibold text-base">
+        <span className="text-[#922d4d] font-semibold text-base">
           {capitalize(format(currentMonth, 'MMMM yyyy', { locale: ptBR }))}
         </span>
         <button
           type="button"
           onClick={nextMonth}
           aria-label="Próximo mês"
-          className="p-1 text-[#81785A] hover:text-[#C496A1] transition-colors duration-300 active:scale-95"
+          className="p-1 text-[#922d4d] hover:text-[#c47590] transition-colors duration-300 active:scale-95"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
       </div>
 
       {/* Calendar grid */}
-      <div className="grid grid-cols-7 gap-1 text-center font-sans p-4 bg-white rounded-2xl border border-[#EBE1C6]">
+      <div className="grid grid-cols-7 gap-1 text-center font-sans p-4 bg-white rounded-2xl border border-[#cd8ea1]/30">
         {/* Day-of-week headers */}
         {DAYS_OF_WEEK.map((day, index) => (
-          <div key={`${day}-${index}`} className="text-xs text-[#81785A]/60 font-medium py-1">
+          <div key={`${day}-${index}`} className="text-xs text-[#cd8ea1] font-medium py-1">
             {day}
           </div>
         ))}
@@ -114,13 +114,13 @@ function CalendarView({ db, selectedDate, onSelectDate }: CalendarViewProps) {
             cellClasses += ' cursor-pointer active:scale-95';
 
             if (isToday) {
-              cellClasses += ' ring-4 ring-[#81785A] ring-offset-2 font-bold z-10 rounded-full';
+              cellClasses += ' ring-4 ring-[#922d4d] ring-offset-2 font-bold z-10 rounded-full';
             }
 
             if (status === 'perfect') {
-              cellClasses += ' bg-[#919D85] text-white rounded-full';
+              cellClasses += ' bg-[#c47590] text-white rounded-full';
             } else if (status === 'partial') {
-              cellClasses += ' border border-[#C496A1] bg-white rounded-full';
+              cellClasses += ' border border-[#cd8ea1] bg-white rounded-full';
             }
           }
 
@@ -144,15 +144,15 @@ function CalendarView({ db, selectedDate, onSelectDate }: CalendarViewProps) {
       </div>
 
       {/* Resumo do Mês */}
-      <div className="mt-4 bg-white rounded-2xl p-4 shadow-sm shadow-[#81785A]/5">
-        <h3 className="text-sm font-semibold text-[#81785A] mb-2">
+      <div className="mt-4 bg-white rounded-2xl p-4 shadow-sm shadow-[#922d4d]/5">
+        <h3 className="text-sm font-semibold text-[#922d4d] mb-2">
           Resumo do Mês
         </h3>
         <div className="flex items-center gap-2">
-          <span className="text-2xl font-bold text-[#919D85]">
+          <span className="text-2xl font-bold text-[#c47590]">
             {perfectCount}
           </span>
-          <span className="text-sm text-[#81785A]">dias perfeitos</span>
+          <span className="text-sm text-[#922d4d]">dias perfeitos</span>
         </div>
       </div>
     </div>

@@ -25,7 +25,7 @@ function App() {
   }, [setSelectedDate])
 
   return (
-    <div className="w-full min-h-screen max-w-md mx-auto bg-[#F7F5F0] flex flex-col relative pb-20 shadow-xl border-x border-gray-200/50">
+    <div className="w-full min-h-screen max-w-md mx-auto bg-[#f7e1e3] flex flex-col relative pb-20 shadow-xl border-x border-gray-200/50">
       {/* Header - Logo minimalista */}
       <header className="py-6 flex justify-center">
         <img
@@ -60,7 +60,7 @@ function App() {
 
       {/* Bottom navigation */}
       <nav
-        className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md h-16 bg-[#EBE1C6] border-t border-[#81785A]/20 flex items-center justify-around px-4 z-40"
+        className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md h-16 bg-white border-t border-[#cd8ea1]/30 flex items-center justify-around px-4 z-40"
         aria-label="Navegação principal"
       >
         {tabs.map(({ id, label, icon: Icon }) => {
@@ -72,13 +72,13 @@ function App() {
               onClick={() => setActiveTab(id)}
               aria-label={label}
               className={`flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all duration-300 ease-in-out ${
-                isActive ? 'text-[#C496A1]' : 'text-[#81785A]/60'
+                isActive ? 'text-[#922d4d]' : 'text-[#cd8ea1]'
               }`}
             >
               <Icon className="w-5 h-5" />
               <div
                 className={`w-1 h-1 rounded-full transition-all duration-300 ease-in-out ${
-                  isActive ? 'bg-[#C496A1] opacity-100' : 'bg-transparent opacity-0'
+                  isActive ? 'bg-[#922d4d] opacity-100' : 'bg-transparent opacity-0'
                 }`}
               />
             </button>

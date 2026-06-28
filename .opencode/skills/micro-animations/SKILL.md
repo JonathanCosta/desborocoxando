@@ -28,7 +28,7 @@ Aplicar por 600ms via estado React, remover classe após animação terminar (`o
 
 - Container SVG com `clip-path` ou altura dinâmica
 - Percentual: `(waterTotal / 2000) * 100` (cap em 100%)
-- Cor do líquido: `#919D85` (verde oliva) se ≥ 2000ml, `#8E88A3` se abaixo
+- Cor do líquido: `#c47590` (rosa escuro) se ≥ 2000ml, `#cd8ea1` se abaixo
 - Transição: `transition-all duration-500 ease-in-out`
 
 ## 3. Expansão de Input Oculto
@@ -37,13 +37,13 @@ Aplicar por 600ms via estado React, remover classe após animação terminar (`o
 <div className={`transition-all duration-300 ease-in-out overflow-hidden ${
   isOpen ? 'max-h-24 opacity-100 mt-2 pt-2 border-t border-gray-100' : 'max-h-0 opacity-0'
 }`}>
-  <input className="border-[#8E88A3] focus:border-[#8E88A3]" />
+  <input className="border-[#cd8ea1] focus:border-[#cd8ea1]" />
 </div>
 ```
 
 ## 4. Pulso de Alerta (Água > 2000ml)
 
-Usar `animate-pulse` do Tailwind com `text-[#919D85] font-bold`.
+Usar `animate-pulse` do Tailwind com `text-[#c47590] font-bold`.
 
 ## 5. Sheet Modal PWA
 

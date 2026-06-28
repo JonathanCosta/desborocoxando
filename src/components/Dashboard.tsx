@@ -36,7 +36,7 @@ export default function Dashboard({
   const waterPercent = Math.min(record.water / 2000, 1);
   const fillHeight = waterPercent * 110;
   const fillY = 168 - fillHeight;
-  const waterColor = record.water >= 2000 ? '#919D85' : '#8E88A3';
+  const waterColor = record.water >= 2000 ? '#922d4d' : '#c47590';
 
   const handleAddWater = (ml: number) => {
     updateRecord({ water: record.water + ml });
@@ -75,7 +75,7 @@ export default function Dashboard({
     <div className="space-y-4">
       {/* Faixa de aviso de data passada */}
       {!isToday && (
-        <div className="bg-[#C496A1] text-white text-xs text-center py-1.5 flex items-center justify-center gap-2">
+        <div className="bg-[#c47590] text-white text-xs text-center py-1.5 flex items-center justify-center gap-2">
           <span>Você está visualizando {format(new Date(selectedDate), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}.</span>
           <button
             type="button"
@@ -88,7 +88,7 @@ export default function Dashboard({
       )}
 
       {/* Card Água */}
-      <div className="bg-[#EBE1C6] rounded-2xl p-4 mb-4">
+      <div className="bg-white rounded-2xl p-4 mb-4 border border-[#cd8ea1]/30 shadow-sm">
         <div className="grid grid-cols-2 gap-4">
           {/* Garrafa SVG */}
           <div
@@ -116,7 +116,7 @@ export default function Dashboard({
               <path
                 d="M35,32 L35,48 Q31,51 31,58 L31,152 Q31,168 50,168 Q69,168 69,152 L69,58 Q69,51 65,48 L65,32 Z"
                 fill="none"
-                stroke="#81785A"
+                stroke="#922d4d"
                 strokeWidth="3"
                 strokeLinejoin="round"
               />
@@ -127,14 +127,14 @@ export default function Dashboard({
                 width="32"
                 height="18"
                 rx="5"
-                fill="#C496A1"
+                fill="#c47590"
               />
               <line
                 x1="40"
                 y1="21"
                 x2="60"
                 y2="21"
-                stroke="#F7F5F0"
+                stroke="#f7e1e3"
                 strokeWidth="2"
                 strokeLinecap="round"
               />
@@ -144,9 +144,9 @@ export default function Dashboard({
           {/* Controles Água */}
           <div className="flex flex-col justify-center gap-3">
             <div
-              className={`text-[#81785A] text-2xl font-serif ${
+              className={`text-[#922d4d] text-2xl font-serif ${
                 record.water > 2000
-                  ? 'animate-pulse text-[#919D85] font-bold'
+                  ? 'animate-pulse text-[#922d4d] font-bold'
                   : ''
               }`}
             >
@@ -158,7 +158,7 @@ export default function Dashboard({
                 type="button"
                 onClick={() => handleAddWater(ml)}
                 aria-label={`Adicionar ${ml}ml`}
-                className="bg-[#C496A1] text-white py-1.5 rounded-full text-sm font-semibold active:scale-95 transition-all w-full"
+                className="bg-[#c47590] text-white py-1.5 rounded-full text-sm font-semibold active:scale-95 transition-all w-full"
               >
                 +{ml}ml
               </button>
@@ -173,10 +173,10 @@ export default function Dashboard({
         return (
           <div
             key={key}
-            className="bg-white p-4 rounded-2xl shadow-sm shadow-[#81785A]/5 mb-3"
+            className="bg-white p-4 rounded-2xl shadow-sm shadow-[#922d4d]/5 mb-3"
           >
             <div className="flex justify-between items-center">
-              <span className="text-sm font-semibold text-[#81785A]">
+              <span className="text-sm font-semibold text-[#922d4d]">
                 {label}
               </span>
               {/* Switch minimalista */}
@@ -190,7 +190,7 @@ export default function Dashboard({
                       : `Marcar ${label} como feito`
                   }
                   className={`relative w-14 h-7 rounded-full transition-all duration-300 ease-out ${
-                    item.done ? 'bg-[#919D85]' : 'bg-gray-100'
+                    item.done ? 'bg-[#c47590]' : 'bg-gray-100'
                   }`}
                 >
                   <span
@@ -213,7 +213,7 @@ export default function Dashboard({
                 value={item.note}
                 onChange={(e) => handleNoteChange(key, e.target.value)}
                 placeholder="Observações..."
-                className="w-full p-2 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#C496A1] focus:ring-1 focus:ring-[#C496A1] focus:outline-none text-sm transition-all"
+                className="w-full p-2 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#c47590] focus:ring-1 focus:ring-[#c47590] focus:outline-none text-sm transition-all"
               />
             </div>
           </div>
@@ -221,8 +221,8 @@ export default function Dashboard({
       })}
 
       {/* Card Refeições */}
-      <div className="bg-white rounded-2xl p-5 shadow-sm shadow-[#81785A]/5 mb-20">
-        <h3 className="text-sm font-semibold text-[#81785A] mb-4">
+      <div className="bg-white rounded-2xl p-5 shadow-sm shadow-[#922d4d]/5 mb-20">
+        <h3 className="text-sm font-semibold text-[#922d4d] mb-4">
           🍽️ Refeições
         </h3>
 
@@ -233,20 +233,20 @@ export default function Dashboard({
             value={newMealDesc}
             onChange={(e) => setNewMealDesc(e.target.value)}
             placeholder="O que comeu?"
-            className="flex-1 p-2 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#C496A1] focus:ring-1 focus:ring-[#C496A1] focus:outline-none text-sm transition-all"
+            className="flex-1 p-2 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#c47590] focus:ring-1 focus:ring-[#c47590] focus:outline-none text-sm transition-all"
           />
           <input
             type="number"
             value={newMealKcal}
             onChange={(e) => setNewMealKcal(e.target.value)}
             placeholder="kcal"
-            className="w-20 p-2 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#C496A1] focus:ring-1 focus:ring-[#C496A1] focus:outline-none text-sm transition-all"
+            className="w-20 p-2 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#c47590] focus:ring-1 focus:ring-[#c47590] focus:outline-none text-sm transition-all"
           />
           <button
             type="button"
             onClick={handleAddMeal}
             aria-label="Adicionar refeição"
-            className="bg-[#C496A1] text-white rounded-full p-2 hover:bg-[#b0808c] active:scale-95 transition-all"
+            className="bg-[#c47590] text-white rounded-full p-2 hover:bg-[#a86278] active:scale-95 transition-all"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -273,7 +273,7 @@ export default function Dashboard({
                 key={meal.id}
                 className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0"
               >
-                <span className="text-sm text-[#81785A]">
+                <span className="text-sm text-[#922d4d]">
                   [{meal.hora}] {meal.descricao} - {meal.kcal} kcal
                 </span>
                 <button
@@ -281,7 +281,7 @@ export default function Dashboard({
                   onClick={() => handleRemoveMeal(meal.id)}
                   aria-label="Remover refeição"
                 >
-                  <Trash2 className="w-4 h-4 text-[#C496A1]" />
+                  <Trash2 className="w-4 h-4 text-[#c47590]" />
                 </button>
               </div>
             ))}
@@ -289,16 +289,16 @@ export default function Dashboard({
         )}
 
         {/* Total */}
-        <div className="font-serif text-[#81785A] font-bold text-right mt-3">
+        <div className="font-serif text-[#922d4d] font-bold text-right mt-3">
           Total Consumido: {totalKcal} kcal
         </div>
       </div>
 
       {/* Card Peso */}
-      <div className="bg-white rounded-2xl shadow-sm shadow-[#81785A]/5 p-4 flex items-center justify-between">
+      <div className="bg-white rounded-2xl shadow-sm shadow-[#922d4d]/5 p-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Scale className="w-5 h-5 text-[#8E88A3]" />
-          <span className="text-sm font-semibold text-[#81785A]">
+          <Scale className="w-5 h-5 text-[#cd8ea1]" />
+          <span className="text-sm font-semibold text-[#922d4d]">
             Peso de Hoje
           </span>
         </div>
@@ -316,9 +316,9 @@ export default function Dashboard({
                 weight: val ? parseFloat(val) : null,
               });
             }}
-            className="w-20 p-2 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#C496A1] focus:ring-1 focus:ring-[#C496A1] focus:outline-none text-sm text-right transition-all"
+            className="w-20 p-2 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#c47590] focus:ring-1 focus:ring-[#c47590] focus:outline-none text-sm text-right transition-all"
           />
-          <span className="text-sm text-[#81785A] font-medium">kg</span>
+          <span className="text-sm text-[#922d4d] font-medium">kg</span>
         </div>
       </div>
     </div>

@@ -36,12 +36,12 @@ export default function Settings({ populateMockData }: SettingsProps) {
 
   return (
     <div className="p-4 space-y-4">
-      <h2 className="text-xl font-bold text-[#81785A] mb-4">Configurações</h2>
+      <h2 className="text-xl font-bold text-[#922d4d] mb-4">Configurações</h2>
 
       {/* Export Backup */}
       <button
         onClick={exportData}
-        className="w-full flex items-center justify-between p-4 bg-[#EBE1C6]/40 rounded-xl border border-[#EBE1C6] text-[#81785A] font-medium active:scale-95 transition-all duration-300 ease-in-out"
+        className="w-full flex items-center justify-between p-4 bg-white rounded-xl border border-[#cd8ea1]/30 text-[#922d4d] font-medium active:scale-95 transition-all duration-300 ease-in-out"
         aria-label="Exportar backup dos dados"
       >
         <div className="flex items-center gap-3">
@@ -54,7 +54,7 @@ export default function Settings({ populateMockData }: SettingsProps) {
       {/* Import Backup */}
       <button
         onClick={handleImportClick}
-        className="w-full flex items-center justify-between p-4 bg-[#EBE1C6]/40 rounded-xl border border-[#EBE1C6] text-[#81785A] font-medium active:scale-95 transition-all duration-300 ease-in-out"
+        className="w-full flex items-center justify-between p-4 bg-white rounded-xl border border-[#cd8ea1]/30 text-[#922d4d] font-medium active:scale-95 transition-all duration-300 ease-in-out"
         aria-label="Importar backup dos dados"
       >
         <div className="flex items-center gap-3">
@@ -76,7 +76,7 @@ export default function Settings({ populateMockData }: SettingsProps) {
       {canInstall && (
         <button
           onClick={() => setShowInstallModal(true)}
-          className="w-full flex items-center justify-between p-4 bg-[#EBE1C6]/40 rounded-xl border border-[#EBE1C6] text-[#81785A] font-medium active:scale-95 transition-all duration-300 ease-in-out"
+          className="w-full flex items-center justify-between p-4 bg-white rounded-xl border border-[#cd8ea1]/30 text-[#922d4d] font-medium active:scale-95 transition-all duration-300 ease-in-out"
           aria-label="Instalar aplicativo"
         >
           <div className="flex items-center gap-3">
@@ -90,14 +90,14 @@ export default function Settings({ populateMockData }: SettingsProps) {
       {/* Dev-only: Popular Dados de Teste */}
       {import.meta.env.DEV && populateMockData && (
         <>
-          <hr className="border-t border-dashed border-[#C496A1]/30 my-4" />
+          <hr className="border-t border-dashed border-[#c47590]/30 my-4" />
           <button
             onClick={() => {
               if (window.confirm('Gerar 365 dias de dados de teste? Isso substituirá todos os dados existentes.')) {
                 populateMockData();
               }
             }}
-            className="w-full flex items-center justify-between p-4 bg-[#C496A1]/10 rounded-xl border border-dashed border-[#C496A1]/40 text-[#C496A1] font-medium active:scale-95 transition-all duration-300 ease-in-out"
+            className="w-full flex items-center justify-between p-4 bg-[#c47590]/10 rounded-xl border border-dashed border-[#c47590]/40 text-[#c47590] font-medium active:scale-95 transition-all duration-300 ease-in-out"
             aria-label="Popular dados de teste"
           >
             <div className="flex items-center gap-3">
@@ -133,7 +133,7 @@ export default function Settings({ populateMockData }: SettingsProps) {
             {!isIOS ? (
               /* Android / Chrome */
               <>
-                <p className="text-center text-[#81785A] mb-4">
+                <p className="text-center text-[#922d4d] mb-4">
                   Instale o Desborocoxando para acesso rápido offline!
                 </p>
                 <button
@@ -141,7 +141,7 @@ export default function Settings({ populateMockData }: SettingsProps) {
                     triggerInstall();
                     closeModal();
                   }}
-                  className="w-full bg-[#C496A1] text-white py-3 rounded-xl font-semibold active:scale-95 transition-all"
+                  className="w-full bg-[#c47590] text-white py-3 rounded-xl font-semibold active:scale-95 transition-all"
                   aria-label="Instalar aplicativo"
                 >
                   Instalar App Desborocoxando
@@ -150,8 +150,8 @@ export default function Settings({ populateMockData }: SettingsProps) {
             ) : (
               /* iOS / Safari */
               <>
-                <div className="bg-[#F7F5F0] rounded-xl p-4 mb-4">
-                  <p className="text-sm text-[#81785A] text-center leading-relaxed">
+                <div className="bg-[#f7e1e3] rounded-xl p-4 mb-4">
+                  <p className="text-sm text-[#922d4d] text-center leading-relaxed">
                     Para instalar no seu iPhone, toque no ícone de compartilhamento
                     <span className="inline-block mx-1">
                       <Share2 className="w-4 h-4 inline" />
@@ -161,7 +161,7 @@ export default function Settings({ populateMockData }: SettingsProps) {
                 </div>
                 <button
                   onClick={closeModal}
-                  className="w-full bg-[#EBE1C6] text-[#81785A] py-3 rounded-xl font-medium active:scale-95 transition-all"
+                  className="w-full bg-[#cd8ea1]/30 text-[#922d4d] py-3 rounded-xl font-medium active:scale-95 transition-all"
                 >
                   Entendi
                 </button>
@@ -170,7 +170,7 @@ export default function Settings({ populateMockData }: SettingsProps) {
 
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 text-[#81785A]"
+              className="absolute top-4 right-4 text-[#922d4d]"
               aria-label="Fechar"
             >
               <X className="w-5 h-5" />

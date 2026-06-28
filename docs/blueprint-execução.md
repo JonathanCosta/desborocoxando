@@ -31,7 +31,7 @@ npm install -D vite-plugin-pwa # Para geração do Service Worker
 Configure o `vite-plugin-pwa` para gerar o manifesto e habilitar cache offline.
 
 * **Nome do App:** Desborocoxando
-* **Cor de Fundo / Tema:** `#F7F5F0` / `#C496A1`
+* **Cor de Fundo / Tema:** `#f7e1e3` / `#c47590`
 * **Estratégia:** `generateSW` com `registerType: 'autoUpdate'`.
 * O arquivo de logo fornecido (`docs/logo.png`) os icones para o pwa e favicon estão no diretorio `docs/pwaicons`,  deverá ser usado na pasta `public`.
 

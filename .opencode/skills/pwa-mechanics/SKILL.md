@@ -17,8 +17,8 @@ VitePWA({
     name: 'Desborocoxando',
     short_name: 'Desboro',
     description: 'App de tracking de hábitos diários',
-    theme_color: '#C496A1',
-    background_color: '#F7F5F0',
+    theme_color: '#c47590',
+    background_color: '#f7e1e3',
     icons: [
       { src: '/pwaicons/ios/192.png', sizes: '192x192', type: 'image/png' },
       { src: '/pwaicons/ios/512.png', sizes: '512x512', type: 'image/png' },

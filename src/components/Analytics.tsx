@@ -40,7 +40,7 @@ function HabitTooltip({ active, payload }: { active?: boolean; payload?: Array<{
     exercise && 'Exercício',
   ].filter(Boolean);
   return (
-    <div className="bg-[#F7F5F0] border border-[#EBE1C6] rounded-lg p-2 text-xs text-[#81785A] shadow-sm">
+    <div className="bg-[#f7e1e3] border border-[#cd8ea1]/30 rounded-lg p-2 text-xs text-[#922d4d] shadow-sm">
       {habitsDone.length > 0
         ? `Hábitos concluídos: ${habitsDone.join(', ')}`
         : 'Nenhum hábito registrado'}
@@ -97,8 +97,8 @@ export default function Analytics({ db }: AnalyticsProps) {
               aria-label={`Filtrar últimos ${label.toLowerCase()}`}
               className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-all duration-300 ease-in-out ${
                 isActive
-                  ? 'bg-[#C496A1] text-white'
-                  : 'bg-gray-100 text-[#81785A]'
+                  ? 'bg-[#c47590] text-white'
+                  : 'bg-gray-100 text-[#922d4d]'
               }`}
             >
               {label}
@@ -108,8 +108,8 @@ export default function Analytics({ db }: AnalyticsProps) {
       </div>
 
       {/* Gráfico 1: Peso (LineChart) */}
-      <div className="bg-white rounded-2xl p-4 border border-[#EBE1C6] mb-6">
-        <h3 className="text-[#81785A] font-semibold text-sm mb-3">
+      <div className="bg-white rounded-2xl p-4 border border-[#cd8ea1]/30 mb-6">
+        <h3 className="text-[#922d4d] font-semibold text-sm mb-3">
           Peso (kg)
         </h3>
         {hasWeightData ? (
@@ -119,34 +119,34 @@ export default function Analytics({ db }: AnalyticsProps) {
                 data={chartData}
                 margin={{ top: 5, right: 5, left: -15, bottom: 5 }}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="#EBE1C6" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#cd8ea1" />
                 <XAxis
                   dataKey="date"
-                  tick={{ fontSize: 10, fill: '#81785A' }}
+                  tick={{ fontSize: 10, fill: '#922d4d' }}
                   tickLine={false}
-                  axisLine={{ stroke: '#EBE1C6' }}
+                  axisLine={{ stroke: '#cd8ea1' }}
                 />
                 <YAxis
-                  tick={{ fontSize: 10, fill: '#81785A' }}
+                  tick={{ fontSize: 10, fill: '#922d4d' }}
                   tickLine={false}
                   axisLine={false}
                   domain={['auto', 'auto']}
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#F7F5F0',
-                    border: '1px solid #EBE1C6',
+                    backgroundColor: '#f7e1e3',
+                    border: '1px solid #cd8ea1',
                     borderRadius: '8px',
                     fontSize: '12px',
                   }}
                 />
                 <ReferenceLine
                   y={70}
-                  stroke="#81785A"
+                  stroke="#922d4d"
                   strokeDasharray="4 4"
                   label={{
                     value: 'Meta: 70kg',
-                    fill: '#81785A',
+                    fill: '#922d4d',
                     fontSize: 10,
                     position: 'right',
                   }}
@@ -156,16 +156,16 @@ export default function Analytics({ db }: AnalyticsProps) {
                   dataKey="weight"
                   connectNulls={true}
                   name="Peso"
-                  stroke="#C496A1"
+                  stroke="#c47590"
                   strokeWidth={3}
-                  dot={{ r: 4, fill: '#C496A1' }}
-                  activeDot={{ r: 6, fill: '#C496A1' }}
+                  dot={{ r: 4, fill: '#c47590' }}
+                  activeDot={{ r: 6, fill: '#c47590' }}
                 />
               </LineChart>
             </ResponsiveContainer>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center py-10 text-[#8E88A3]">
+          <div className="flex flex-col items-center justify-center py-10 text-[#cd8ea1]">
             <Scale className="w-8 h-8 mb-2 opacity-50" />
             <p className="text-sm">Nenhum registro de peso disponível</p>
           </div>
@@ -173,8 +173,8 @@ export default function Analytics({ db }: AnalyticsProps) {
       </div>
 
       {/* Gráfico 2: Água (BarChart) */}
-      <div className="bg-white rounded-2xl p-4 border border-[#EBE1C6] mb-6">
-        <h3 className="text-[#81785A] font-semibold text-sm mb-3">
+      <div className="bg-white rounded-2xl p-4 border border-[#cd8ea1]/30 mb-6">
+        <h3 className="text-[#922d4d] font-semibold text-sm mb-3">
           Água (ml)
         </h3>
         <div className="h-[260px]">
@@ -183,40 +183,40 @@ export default function Analytics({ db }: AnalyticsProps) {
               data={chartData}
               margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#EBE1C6" strokeOpacity={0.1} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#cd8ea1" strokeOpacity={0.1} />
               <XAxis
                 dataKey="date"
-                tick={{ fontSize: 10, fill: '#81785A' }}
+                tick={{ fontSize: 10, fill: '#922d4d' }}
                 tickLine={false}
-                axisLine={{ stroke: '#EBE1C6' }}
+                axisLine={{ stroke: '#cd8ea1' }}
               />
               <YAxis
-                tick={{ fontSize: 10, fill: '#81785A' }}
+                tick={{ fontSize: 10, fill: '#922d4d' }}
                 tickLine={false}
                 axisLine={false}
                 label={{
                   value: 'ml',
                   angle: -90,
                   position: 'insideLeft',
-                  fill: '#81785A',
+                  fill: '#922d4d',
                   fontSize: 10,
                 }}
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#F7F5F0',
-                  border: '1px solid #EBE1C6',
+                  backgroundColor: '#f7e1e3',
+                  border: '1px solid #cd8ea1',
                   borderRadius: '8px',
                   fontSize: '12px',
                 }}
               />
               <ReferenceLine
                 y={2000}
-                stroke="#81785A"
+                stroke="#922d4d"
                 strokeDasharray="4 4"
                 label={{
                   value: 'Meta: 2000ml',
-                  fill: '#81785A',
+                  fill: '#922d4d',
                   fontSize: 10,
                   position: 'right',
                 }}
@@ -226,7 +226,7 @@ export default function Analytics({ db }: AnalyticsProps) {
                   <Cell
                     key={index}
                     fill={
-                      chartData[index].water >= 2000 ? '#919D85' : '#8E88A3'
+                      chartData[index].water >= 2000 ? '#c47590' : '#cd8ea1'
                     }
                   />
                 ))}
@@ -237,8 +237,8 @@ export default function Analytics({ db }: AnalyticsProps) {
       </div>
 
       {/* Gráfico 3: Consistência de Hábitos (AreaChart) */}
-      <div className="bg-white rounded-2xl p-4 border border-[#EBE1C6] mb-6">
-        <h3 className="text-[#81785A] font-semibold text-sm mb-3">
+      <div className="bg-white rounded-2xl p-4 border border-[#cd8ea1]/30 mb-6">
+        <h3 className="text-[#922d4d] font-semibold text-sm mb-3">
           Consistência de Hábitos
         </h3>
         <div className="h-[260px]">
@@ -247,15 +247,15 @@ export default function Analytics({ db }: AnalyticsProps) {
               data={chartData}
               margin={{ top: 5, right: 5, left: -15, bottom: 5 }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#EBE1C6" strokeOpacity={0.1} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#cd8ea1" strokeOpacity={0.1} />
               <XAxis
                 dataKey="date"
-                tick={{ fontSize: 10, fill: '#81785A' }}
+                tick={{ fontSize: 10, fill: '#922d4d' }}
                 tickLine={false}
-                axisLine={{ stroke: '#EBE1C6' }}
+                axisLine={{ stroke: '#cd8ea1' }}
               />
               <YAxis
-                tick={{ fontSize: 10, fill: '#81785A' }}
+                tick={{ fontSize: 10, fill: '#922d4d' }}
                 tickLine={false}
                 axisLine={false}
                 domain={[0, 3]}
@@ -266,11 +266,11 @@ export default function Analytics({ db }: AnalyticsProps) {
                 type="monotone"
                 dataKey="habits"
                 name="Hábitos"
-                stroke="#8E88A3"
-                fill="#8E88A3"
+                stroke="#cd8ea1"
+                fill="#cd8ea1"
                 fillOpacity={0.3}
                 strokeWidth={2}
-                dot={{ r: 3, fill: '#8E88A3' }}
+                dot={{ r: 3, fill: '#cd8ea1' }}
               />
             </AreaChart>
           </ResponsiveContainer>

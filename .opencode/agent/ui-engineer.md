@@ -22,7 +22,7 @@ mode: subagent
 
 - Nunca crie lógica de estado ou persistência. Receba props e callbacks.
 - Nunca acesse `localStorage` diretamente.
-- Cores obrigatórias: `#C496A1` (rosa floral), `#919D85` (verde oliva), `#81785A` (ouro escuro), `#EBE1C6` (bege), `#F7F5F0` (fundo), `#8E88A3` (lavanda).
+- Cores obrigatórias: `#f7e1e3` (fundo), `#cd8ea1` (bordas/inativo), `#c47590` (primária/ação), `#922d4d` (destaque/tipografia), `#ffffff` (branco).
 - Containers: `rounded-2xl` para cards, `rounded-full` para pills.
 - Transições: `transition-all duration-300 ease-in-out`.
 - Nav inferior: `fixed bottom-0 left-1/2 -translate-x-1/2 max-w-md`.

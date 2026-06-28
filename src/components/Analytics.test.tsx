@@ -136,8 +136,8 @@ describe('Analytics', () => {
       render(<Analytics db={mockDb} />);
       const btn7 = screen.getByRole('button', { name: /filtrar últimos 7 dias/i });
       expect(btn7).toBeInTheDocument();
-      // active class from the component: bg-[#C496A1]
-      expect(btn7.className).toContain('C496A1');
+      // active class from the component: bg-[#c47590]
+      expect(btn7.className).toContain('c47590');
     });
 
     it('não exibe botão "1 Ano" ou "365" na tela', () => {

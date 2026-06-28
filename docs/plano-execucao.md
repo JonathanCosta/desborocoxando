@@ -22,7 +22,7 @@
 - Configurar `vite.config.ts` com VitePWA:
   - `registerType: 'autoUpdate'`
   - `strategies: 'generateSW'`
-  - `theme_color: '#C496A1'`, `background_color: '#F7F5F0'`
+   - `theme_color: '#c47590'`, `background_color: '#f7e1e3'`
   - Ícones: `docs/pwaicons/` copiados para `public/pwaicons/`
 - Estrutura de pastas:
   ```
@@ -127,7 +127,7 @@ export const emptyRecord = (date: string): DailyRecord => ({
     animation: balancoGarrafa 600ms ease-in-out;
   }
   .bg-floral-gradient {
-    background: linear-gradient(135deg, #F7F5F0 0%, #EBE1C6 100%);
+    background: linear-gradient(135deg, #f7e1e3 0%, #cd8ea1 100%);
   }
 }
 ```
@@ -139,16 +139,16 @@ export const emptyRecord = (date: string): DailyRecord => ({
 
 ### Container
 ```tsx
-<div className="w-full min-h-screen max-w-md mx-auto bg-[#F7F5F0] flex flex-col relative pb-20 shadow-xl border-x border-gray-200/50">
+<div className="w-full min-h-screen max-w-md mx-auto bg-[#f7e1e3] flex flex-col relative pb-20 shadow-xl border-x border-gray-200/50">
   {/* tela ativa */}
 </div>
 ```
 
 ### Bottom Nav
 ```tsx
-<nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md h-16 bg-[#EBE1C6] border-t border-[#81785A]/20 flex items-center justify-around px-4 z-40">
+<nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md h-16 bg-white border-t border-[#cd8ea1]/30 flex items-center justify-around px-4 z-40">
   {/* 4 itens com Lucide icons */}
-  {/* Ativo: cor #C496A1 + dot indicador; Inativo: #81785A opacity-60 */}
+  {/* Ativo: cor #922d4d + dot indicador; Inativo: #cd8ea1 opacity-60 */}
   {/* aria-label em cada botao */}
 </nav>
 ```
@@ -165,25 +165,25 @@ export const emptyRecord = (date: string): DailyRecord => ({
 
 ### Header
 - Logo centralizado (`h-16 w-auto object-contain py-2`, `<img>` com `aria-label="Desborocoxando"`)
-- Faixa condicional se `selectedDate !== today`: `bg-[#C496A1] text-white text-xs text-center py-1.5 flex items-center justify-center gap-2` + link "Voltar para Hoje"
+- Faixa condicional se `selectedDate !== today`: `bg-[#c47590] text-white text-xs text-center py-1.5 flex items-center justify-center gap-2` + link "Voltar para Hoje"
 
 ### Card Água
-- `bg-[#EBE1C6] rounded-2xl p-4 mb-4 grid grid-cols-2`
-- Esquerda: SVG garrafa (`w-24 h-40 mx-auto relative`) com fill dinâmico `(water / 2000) * 100` (cap 100%). Cor: `#919D85` se >=2000, `#8E88A3` se <2000. Transição `duration-500 ease-in-out`
+- `bg-white rounded-2xl p-4 mb-4 grid grid-cols-2 border border-[#cd8ea1]/30`
+- Esquerda: SVG garrafa (`w-24 h-40 mx-auto relative`) com fill dinâmico `(water / 2000) * 100` (cap 100%). Cor: `#922d4d` se >=2000, `#c47590` se <2000. Transição `duration-500 ease-in-out`
 - Clique em botões (+100/+300/+500) → `animate-garrafa-balanco` por 600ms
-- Direita: `X / 2000 ml` (`text-[#81785A] text-2xl font-serif`). Se >2000: `animate-pulse text-[#919D85] font-bold`
-- Botões: `bg-[#C496A1] text-white py-1.5 rounded-full text-sm font-semibold active:scale-95 transition-all` com `aria-label`
+- Direita: `X / 2000 ml` (`text-[#922d4d] text-2xl font-serif`). Se >2000: `animate-pulse text-[#922d4d] font-bold`
+- Botões: `bg-[#c47590] text-white py-1.5 rounded-full text-sm font-semibold active:scale-95 transition-all` com `aria-label`
 
 ### Cards Remédio, Care, Exercício
-- Container: `flex justify-between items-center bg-white p-4 rounded-xl border border-[#EBE1C6] mb-3`
-- Toggle pílula: "Não" (bg-gray-200) / "Sim" (bg-[#919D85] text-white) — `aria-label="Marcar {nome} como concluído"`
+- Container: `flex justify-between items-center bg-white p-4 rounded-xl border border-[#cd8ea1]/30 mb-3`
+- Toggle pílula: "Não" (bg-gray-100 text-[#cd8ea1]) / "Sim" (bg-[#c47590] text-white) — `aria-label="Marcar {nome} como concluído"`
 - Input expansível: `transition-all duration-300 ease-in-out overflow-hidden` + `max-h-0 opacity-0` / `max-h-24 opacity-100 mt-2 pt-2 border-t border-gray-100`
-- Input: `border-[#8E88A3] focus:border-[#8E88A3] w-full p-2 rounded-lg border`
+- Input: `border-[#cd8ea1] focus:border-[#c47590] w-full p-2 rounded-lg border`
 
 ### Card Refeições
-- Formulário inline: input descrição + input kcal (number) + botão `+` circular (`bg-[#C496A1] text-white rounded-full p-2`)
-- Lista: `[Hora] Descrição - XX kcal` + ícone `Trash2` (Lucide, cor `#C496A1`, `aria-label="Remover refeição"`)
-- Total: `Total Consumido: XXXX kcal` — `font-serif text-[#81785A] font-bold`
+- Formulário inline: input descrição + input kcal (number) + botão `+` circular (`bg-[#c47590] text-white rounded-full p-2`)
+- Lista: `[Hora] Descrição - XX kcal` + ícone `Trash2` (Lucide, cor `#c47590`, `aria-label="Remover refeição"`)
+- Total: `Total Consumido: XXXX kcal` — `font-serif text-[#922d4d] font-bold`
 - **Nunca usar `dangerouslySetInnerHTML`** — regra `react/no-danger` como error no ESLint
 
 ---
@@ -191,10 +191,10 @@ export const emptyRecord = (date: string): DailyRecord => ({
 ## Stage 7: Tela 2 — Calendário/Histórico (`src/components/CalendarView.tsx`)
 **Responsável:** UI Engineer
 
-- Grade: `grid grid-cols-7 gap-1 text-center font-sans p-4 bg-white rounded-2xl border border-[#EBE1C6]`
-- Hoje: `ring-4 ring-[#81785A] ring-offset-2 font-bold z-10`
-- Dia perfeito (water>=2000 + meds + care + exercise): `bg-[#919D85] text-white`
-- Dia parcial (algum dado, checklist incompleto): borda `border border-[#C496A1] bg-white`
+- Grade: `grid grid-cols-7 gap-1 text-center font-sans p-4 bg-white rounded-2xl border border-[#cd8ea1]/30`
+- Hoje: `ring-4 ring-[#922d4d] ring-offset-2 font-bold z-10`
+- Dia perfeito (water>=2000 + meds + care + exercise): `bg-[#c47590] text-white`
+- Dia parcial (algum dado, checklist incompleto): borda `border border-[#cd8ea1] bg-white`
 - Vazio: sem destaque
 - Click → atualiza `selectedDate` + navega para Dashboard
 - `aria-label` em cada célula: `"Dia {X} de {mês}"`
@@ -204,20 +204,20 @@ export const emptyRecord = (date: string): DailyRecord => ({
 ## Stage 8: Tela 3 — Analytics (`src/components/Analytics.tsx`)
 **Responsável:** UI Engineer
 
-- Filtro: 3 botões pílula `[7 Dias] [30 Dias] [1 Ano]` — selecionado: `bg-[#C496A1] text-white`
+- Filtro: 2 botões pílula `[7 Dias] [30 Dias]` — selecionado: `bg-[#c47590] text-white`
 - Scroll vertical livre, containers `h-[260px]`
 
 ### Gráfico de Peso (LineChart)
-- Linha: `stroke="#C496A1" strokeWidth={3}`
-- `<ReferenceLine label="Meta: 70kg" stroke="#81785A" strokeDasharray="4 4" y={70} />`
+- Linha: `stroke="#c47590" strokeWidth={3}`
+- `<ReferenceLine label="Meta: 70kg" stroke="#922d4d" strokeDasharray="4 4" y={70} />`
 
 ### Gráfico de Água (BarChart)
-- Barra cor: `fill="#919D85"` se >=2000, `fill="#8E88A3"` se <2000 (função no `cell`)
-- `<ReferenceLine y={2000} stroke="#81785A" strokeDasharray="4 4" />`
+- Barra cor: `fill="#c47590"` se >=2000, `fill="#cd8ea1"` se <2000 (função no `cell`)
+- `<ReferenceLine y={2000} stroke="#922d4d" strokeDasharray="4 4" />`
 
 ### Gráfico de Consistência (AreaChart)
 - Eixo Y: 0-3 (hábitos marcados como "Sim")
-- Cor: `#8E88A3` com opacidade reduzida
+- Cor: `#cd8ea1` com opacidade reduzida
 
 ---
 
@@ -226,14 +226,14 @@ export const emptyRecord = (date: string): DailyRecord => ({
 
 ### Configurações
 - `space-y-4`
-- Botões: `w-full flex items-center justify-between p-4 bg-[#EBE1C6]/40 rounded-xl border border-[#EBE1C6] text-[#81785A] font-medium`
+- Botões: `w-full flex items-center justify-between p-4 bg-white rounded-xl border border-[#cd8ea1]/30 text-[#922d4d] font-medium`
 - "Exportar Backup" → `exportData()`
 - "Importar Backup" → `<input type="file" accept=".json" hidden>` + label → `importData(file)`
 
 ### Mini Modal PWA
 - Gatilho: `canInstall` do `usePWA` + estado de dispensa
 - Animação: `fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white rounded-t-3xl p-6 shadow-[0_-10px_25px_rgba(0,0,0,0.1)] z-50 transform transition-transform duration-500 translate-y-0`
-- **Android/Chrome:** Logo (`h-12`) + botão "Instalar App Desborocoxando" (`bg-[#C496A1] text-white`) → `triggerInstall()`
+- **Android/Chrome:** Logo (`h-12`) + botão "Instalar App Desborocoxando" (`bg-[#c47590] text-white`) → `triggerInstall()`
 - **iOS/Safari:** Instruções visuais (ícone compartilhar + "Adicionar à Tela de Início") + botão "Entendi"
 - **Acessibilidade:** `role="dialog"`, `aria-modal="true"`, foco preso no modal
 
