@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: 'Advent Pro', sans-serif;
+}
+
 @layer utilities {
   @keyframes balancoGarrafa {
     0%, 100% { transform: rotate(0deg); }

@@ -24,6 +24,8 @@ type Range = '7days' | '30days';
 
 interface AnalyticsProps {
   db: AppDatabase;
+  waterGoal: number;
+  weightGoal: number;
 }
 
 const ranges: { label: string; value: Range }[] = [
@@ -48,7 +50,7 @@ function HabitTooltip({ active, payload }: { active?: boolean; payload?: Array<{
   );
 }
 
-export default function Analytics({ db }: AnalyticsProps) {
+export default function Analytics({ db, waterGoal, weightGoal }: AnalyticsProps) {
   const [range, setRange] = useState<Range>('7days');
 
   const RANGE_TO_DAYS: Record<Range, number> = { '7days': 7, '30days': 30 };
@@ -141,11 +143,12 @@ export default function Analytics({ db }: AnalyticsProps) {
                   }}
                 />
                 <ReferenceLine
-                  y={70}
+                  y={weightGoal}
                   stroke="#922d4d"
-                  strokeDasharray="4 4"
+                  strokeWidth={2}
+                  strokeDasharray="6 4"
                   label={{
-                    value: 'Meta: 70kg',
+                    value: `Meta: ${weightGoal}kg`,
                     fill: '#922d4d',
                     fontSize: 10,
                     position: 'right',
@@ -211,11 +214,12 @@ export default function Analytics({ db }: AnalyticsProps) {
                 }}
               />
               <ReferenceLine
-                y={2000}
+                y={waterGoal}
                 stroke="#922d4d"
-                strokeDasharray="4 4"
+                strokeWidth={2}
+                strokeDasharray="6 4"
                 label={{
-                  value: 'Meta: 2000ml',
+                  value: `Meta: ${waterGoal}ml`,
                   fill: '#922d4d',
                   fontSize: 10,
                   position: 'right',
@@ -226,7 +230,7 @@ export default function Analytics({ db }: AnalyticsProps) {
                   <Cell
                     key={index}
                     fill={
-                      chartData[index].water >= 2000 ? '#c47590' : '#cd8ea1'
+                      chartData[index].water >= waterGoal ? '#c47590' : '#cd8ea1'
                     }
                   />
                 ))}

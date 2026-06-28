@@ -107,24 +107,24 @@ const mockDbNoWeight: AppDatabase = {
 describe('Analytics', () => {
   describe('renderização com db vazio', () => {
     it('exibe fallback "Nenhum registro de peso disponível" quando db é vazio', () => {
-      render(<Analytics db={emptyDb} />);
+      render(<Analytics db={emptyDb} waterGoal={2000} weightGoal={70} />);
       expect(screen.getByText('Nenhum registro de peso disponível')).toBeInTheDocument();
     });
 
     it('exibe fallback quando registros existem mas weight é null', () => {
-      render(<Analytics db={mockDbNoWeight} />);
+      render(<Analytics db={mockDbNoWeight} waterGoal={2000} weightGoal={70} />);
       expect(screen.getByText('Nenhum registro de peso disponível')).toBeInTheDocument();
     });
   });
 
   describe('renderização com dados mock', () => {
     it('não exibe fallback quando há registros com weight preenchido', () => {
-      render(<Analytics db={mockDb} />);
+      render(<Analytics db={mockDb} waterGoal={2000} weightGoal={70} />);
       expect(screen.queryByText('Nenhum registro de peso disponível')).not.toBeInTheDocument();
     });
 
     it('renderiza os títulos dos gráficos', () => {
-      render(<Analytics db={mockDb} />);
+      render(<Analytics db={mockDb} waterGoal={2000} weightGoal={70} />);
       expect(screen.getByText('Peso (kg)')).toBeInTheDocument();
       expect(screen.getByText('Água (ml)')).toBeInTheDocument();
       expect(screen.getByText('Consistência de Hábitos')).toBeInTheDocument();
@@ -133,7 +133,7 @@ describe('Analytics', () => {
 
   describe('filtro de range', () => {
     it('filtro padrão é 7days — botão "7 Dias" está ativo', () => {
-      render(<Analytics db={mockDb} />);
+      render(<Analytics db={mockDb} waterGoal={2000} weightGoal={70} />);
       const btn7 = screen.getByRole('button', { name: /filtrar últimos 7 dias/i });
       expect(btn7).toBeInTheDocument();
       // active class from the component: bg-[#c47590]
@@ -141,14 +141,14 @@ describe('Analytics', () => {
     });
 
     it('não exibe botão "1 Ano" ou "365" na tela', () => {
-      render(<Analytics db={mockDb} />);
+      render(<Analytics db={mockDb} waterGoal={2000} weightGoal={70} />);
       expect(screen.queryByRole('button', { name: /1 ano/i })).not.toBeInTheDocument();
       expect(screen.queryByText('1 Ano')).not.toBeInTheDocument();
       expect(screen.queryByText('365')).not.toBeInTheDocument();
     });
 
     it('renderiza exatamente 2 botões de filtro: "7 Dias" e "30 Dias"', () => {
-      render(<Analytics db={mockDb} />);
+      render(<Analytics db={mockDb} waterGoal={2000} weightGoal={70} />);
       const btn7 = screen.getByRole('button', { name: /filtrar últimos 7 dias/i });
       const btn30 = screen.getByRole('button', { name: /filtrar últimos 30 dias/i });
       expect(btn7).toBeInTheDocument();

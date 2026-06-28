@@ -2,12 +2,15 @@ import { useState, useRef } from 'react';
 import { Download, Upload, ChevronRight, Share2, X, Beaker } from 'lucide-react';
 import { useBackup } from '../hooks/useBackup';
 import { usePWA } from '../hooks/usePWA';
+import type { Settings } from '../hooks/useSettings';
 
 interface SettingsProps {
   populateMockData?: () => void;
+  settings: Settings;
+  updateSettings: (partial: Partial<Settings>) => void;
 }
 
-export default function Settings({ populateMockData }: SettingsProps) {
+export default function Settings({ populateMockData, settings, updateSettings }: SettingsProps) {
   const { exportData, importData } = useBackup();
   const { isIOS, triggerInstall, canInstall } = usePWA();
   const [showInstallModal, setShowInstallModal] = useState(false);
@@ -71,6 +74,47 @@ export default function Settings({ populateMockData }: SettingsProps) {
         ref={fileInputRef}
         onChange={handleFileChange}
       />
+
+      {/* Minhas Metas */}
+      <div className="bg-white rounded-xl border border-[#cd8ea1]/30 p-4 space-y-3">
+        <h3 className="text-[#922d4d] font-semibold text-sm">🎯 Minhas Metas</h3>
+        <div>
+          <label className="block text-xs text-[#922d4d] font-medium mb-1">
+            Meta de Água (ml)
+          </label>
+          <input
+            type="number"
+            min={0}
+            step={100}
+            value={settings.waterGoal}
+            onChange={(e) => {
+              const val = parseFloat(e.target.value);
+              if (!isNaN(val) && val >= 0) {
+                updateSettings({ waterGoal: val });
+              }
+            }}
+            className="w-full p-2 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#c47590] focus:ring-1 focus:ring-[#c47590] focus:outline-none text-sm text-[#922d4d] transition-all"
+          />
+        </div>
+        <div>
+          <label className="block text-xs text-[#922d4d] font-medium mb-1">
+            Meta de Peso (kg)
+          </label>
+          <input
+            type="number"
+            min={0}
+            step={0.1}
+            value={settings.weightGoal}
+            onChange={(e) => {
+              const val = parseFloat(e.target.value);
+              if (!isNaN(val) && val >= 0) {
+                updateSettings({ weightGoal: val });
+              }
+            }}
+            className="w-full p-2 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#c47590] focus:ring-1 focus:ring-[#c47590] focus:outline-none text-sm text-[#922d4d] transition-all"
+          />
+        </div>
+      </div>
 
       {/* Install App */}
       {canInstall && (

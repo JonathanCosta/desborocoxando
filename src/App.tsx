@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Droplets, Calendar, BarChart3, Settings as SettingsIcon } from 'lucide-react'
 import { useAppData } from './hooks/useAppData'
+import { useSettings } from './hooks/useSettings'
 import Dashboard from './components/Dashboard'
 import CalendarView from './components/CalendarView'
 import Analytics from './components/Analytics'
@@ -17,7 +18,8 @@ const tabs: { id: Tab; label: string; icon: typeof Droplets }[] = [
 
 function App() {
   const [activeTab, setActiveTab] = useState<Tab>('dashboard')
-  const { db, selectedDate, setSelectedDate, getCurrentRecord, updateRecord, populateMockData } = useAppData()
+  const { db, selectedDate, setSelectedDate, getCurrentRecord, updateRecord, updateWater, populateMockData } = useAppData()
+  const { settings, updateSettings } = useSettings()
 
   const handleSelectDate = useCallback((date: string) => {
     setSelectedDate(date)
@@ -43,6 +45,8 @@ function App() {
             setSelectedDate={setSelectedDate}
             getCurrentRecord={getCurrentRecord}
             updateRecord={updateRecord}
+            waterGoal={settings.waterGoal}
+            updateWater={updateWater}
           />
         )}
         {activeTab === 'calendar' && (
@@ -50,12 +54,13 @@ function App() {
             db={db}
             selectedDate={selectedDate}
             onSelectDate={handleSelectDate}
+            waterGoal={settings.waterGoal}
           />
         )}
         {activeTab === 'analytics' && (
-          <Analytics db={db} />
+          <Analytics db={db} waterGoal={settings.waterGoal} weightGoal={settings.weightGoal} />
         )}
-        {activeTab === 'settings' && <Settings populateMockData={populateMockData} />}
+        {activeTab === 'settings' && <Settings populateMockData={populateMockData} settings={settings} updateSettings={updateSettings} />}
       </main>
 
       {/* Bottom navigation */}

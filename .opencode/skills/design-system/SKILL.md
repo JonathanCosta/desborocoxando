@@ -16,8 +16,7 @@ description: Use ao criar ou estilizar componentes. Contém paleta rosa, tipogra
 | Branco | `#ffffff` | Cards, nav inferior, contraste com fundo |
 
 ## Tipografia
-- Font padrão: `font-sans` (sistema)
-- Destaques numéricos: `font-serif`
+- Font padrão: `font-sans` (sistema); `font-advent` para títulos e destaques numéricos (Advent Pro, Google Fonts)
 - Pesos: `font-semibold` para botões, `font-bold` para totais e dias ativos
 - Contraste: texto `#922d4d` sobre fundo `#f7e1e3` (~7:1 WCAG AA). Placeholders em `#cd8ea1` (~2.8:1, tolerância estética).
 

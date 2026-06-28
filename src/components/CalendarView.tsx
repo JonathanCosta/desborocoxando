@@ -18,6 +18,7 @@ interface CalendarViewProps {
   db: AppDatabase;
   selectedDate: string;
   onSelectDate: (date: string) => void;
+  waterGoal: number;
 }
 
 const DAYS_OF_WEEK = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
@@ -26,16 +27,16 @@ function capitalize(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function getDayStatus(dateStr: string, db: AppDatabase): 'perfect' | 'partial' | 'empty' {
+function getDayStatus(dateStr: string, db: AppDatabase, waterGoal: number): 'perfect' | 'partial' | 'empty' {
   const record = db[dateStr];
   if (!record) return 'empty';
   const { water, meds, care, exercise } = record;
-  if (water >= 2000 && meds.done && care.done && exercise.done) return 'perfect';
+  if (water >= waterGoal && meds.done && care.done && exercise.done) return 'perfect';
   if (water > 0 || meds.done || care.done || exercise.done || record.meals.length > 0) return 'partial';
   return 'empty';
 }
 
-function CalendarView({ db, selectedDate, onSelectDate }: CalendarViewProps) {
+function CalendarView({ db, selectedDate, onSelectDate, waterGoal }: CalendarViewProps) {
   const [currentMonth, setCurrentMonth] = useState(() => new Date());
 
   const days = useMemo(() => {
@@ -49,9 +50,9 @@ function CalendarView({ db, selectedDate, onSelectDate }: CalendarViewProps) {
   const perfectCount = useMemo(() => {
     return days.filter((day) => {
       if (!isSameMonth(day, currentMonth)) return false;
-      return getDayStatus(normalizeDate(day), db) === 'perfect';
+      return getDayStatus(normalizeDate(day), db, waterGoal) === 'perfect';
     }).length;
-  }, [days, currentMonth, db]);
+  }, [days, currentMonth, db, waterGoal]);
 
   const todayStr = today();
 
@@ -103,7 +104,7 @@ function CalendarView({ db, selectedDate, onSelectDate }: CalendarViewProps) {
           const isCurrentMonth = isSameMonth(day, currentMonth);
           const isToday = dateStr === todayStr;
           const isSelected = dateStr === selectedDate;
-          const status = getDayStatus(dateStr, db);
+          const status = getDayStatus(dateStr, db, waterGoal);
 
           let cellClasses =
             'w-9 h-9 flex items-center justify-center text-sm transition-all duration-300 ease-in-out';

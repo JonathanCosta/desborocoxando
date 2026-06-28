@@ -50,10 +50,21 @@ export function useAppData() {
     });
   }, [selectedDate]);
 
+  const updateWater = useCallback((delta: number) => {
+    setDb(prev => {
+      const current = prev[selectedDate] ?? emptyRecord(selectedDate);
+      const newWater = Math.max(0, current.water + delta);
+      return {
+        ...prev,
+        [selectedDate]: { ...current, water: newWater, date: selectedDate },
+      };
+    });
+  }, [selectedDate]);
+
   const populateMockData = useCallback(() => {
     const mockData = generateMockData();
     setDb(mockData);
   }, []);
 
-  return { db, selectedDate, setSelectedDate, getCurrentRecord, updateRecord, populateMockData };
+  return { db, selectedDate, setSelectedDate, getCurrentRecord, updateRecord, updateWater, populateMockData };
 }

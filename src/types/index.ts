@@ -7,7 +7,7 @@ export interface Meal {
 
 export interface DailyRecord {
   date: string;                       // "YYYY-MM-DD"
-  water: number;                      // ml (pode exceder 2000)
+  water: number;                      // ml (pode exceder a meta)
   meds: { done: boolean; note: string };
   care: { done: boolean; note: string };
   exercise: { done: boolean; note: string };

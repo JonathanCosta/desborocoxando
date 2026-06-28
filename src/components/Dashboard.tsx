@@ -10,6 +10,8 @@ interface DashboardProps {
   setSelectedDate: (date: string) => void;
   getCurrentRecord: () => DailyRecord;
   updateRecord: (partial: Partial<DailyRecord>) => void;
+  waterGoal: number;
+  updateWater: (delta: number) => void;
 }
 
 const CARD_CONFIGS: { key: 'meds' | 'care' | 'exercise'; label: string }[] = [
@@ -23,6 +25,8 @@ export default function Dashboard({
   setSelectedDate,
   getCurrentRecord,
   updateRecord,
+  waterGoal,
+  updateWater,
 }: DashboardProps) {
   const record = getCurrentRecord();
   const isToday = selectedDate === today();
@@ -33,13 +37,13 @@ export default function Dashboard({
   const [newMealKcal, setNewMealKcal] = useState('');
 
   // Water bottle calculations
-  const waterPercent = Math.min(record.water / 2000, 1);
+  const waterPercent = Math.min(record.water / waterGoal, 1);
   const fillHeight = waterPercent * 110;
   const fillY = 168 - fillHeight;
-  const waterColor = record.water >= 2000 ? '#922d4d' : '#c47590';
+  const waterColor = record.water >= waterGoal ? '#922d4d' : '#c47590';
 
-  const handleAddWater = (ml: number) => {
-    updateRecord({ water: record.water + ml });
+  const handleWaterChange = (delta: number) => {
+    updateWater(delta);
     setIsBottleAnimating(true);
     setTimeout(() => setIsBottleAnimating(false), 600);
   };
@@ -89,7 +93,7 @@ export default function Dashboard({
 
       {/* Card Água */}
       <div className="bg-white rounded-2xl p-4 mb-4 border border-[#cd8ea1]/30 shadow-sm">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-[1fr_1.5fr] gap-4 items-center">
           {/* Garrafa SVG */}
           <div
             className={`w-24 h-40 mx-auto relative ${
@@ -144,24 +148,34 @@ export default function Dashboard({
           {/* Controles Água */}
           <div className="flex flex-col justify-center gap-3">
             <div
-              className={`text-[#922d4d] text-2xl font-serif ${
-                record.water > 2000
+              className={`text-[#922d4d] text-xl sm:text-2xl font-advent whitespace-nowrap ${
+                record.water > waterGoal
                   ? 'animate-pulse text-[#922d4d] font-bold'
                   : ''
               }`}
             >
-              {record.water} / 2000 ml
+              {record.water} / {waterGoal} ml
             </div>
             {[100, 300, 500].map((ml) => (
-              <button
-                key={ml}
-                type="button"
-                onClick={() => handleAddWater(ml)}
-                aria-label={`Adicionar ${ml}ml`}
-                className="bg-[#c47590] text-white py-1.5 rounded-full text-sm font-semibold active:scale-95 transition-all w-full"
-              >
-                +{ml}ml
-              </button>
+              <div key={ml} className="flex items-center justify-between w-full max-w-[160px] mx-auto mb-3 bg-[#f7e1e3]/30 rounded-full p-1">
+                <button
+                  type="button"
+                  onClick={() => handleWaterChange(-ml)}
+                  aria-label={`Remover ${ml}ml`}
+                  className="w-8 h-8 rounded-full flex items-center justify-center bg-[#f7e1e3] text-[#922d4d] font-bold shrink-0 active:scale-95 transition-all"
+                >
+                  −
+                </button>
+                <span className="text-sm text-[#922d4d] font-bold text-center w-full">{ml}ml</span>
+                <button
+                  type="button"
+                  onClick={() => handleWaterChange(ml)}
+                  aria-label={`Adicionar ${ml}ml`}
+                  className="w-8 h-8 rounded-full flex items-center justify-center bg-[#c47590] text-white font-bold shrink-0 active:scale-95 transition-all"
+                >
+                  +
+                </button>
+              </div>
             ))}
           </div>
         </div>
@@ -289,7 +303,7 @@ export default function Dashboard({
         )}
 
         {/* Total */}
-        <div className="font-serif text-[#922d4d] font-bold text-right mt-3">
+        <div className="font-advent text-[#922d4d] font-bold text-right mt-3">
           Total Consumido: {totalKcal} kcal
         </div>
       </div>
