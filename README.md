@@ -27,10 +27,6 @@ Desborocoxando é um aplicativo web progressivo (PWA) para pessoas que desejam r
 
 ## 📸 Telas do Aplicativo
 
-> 🖼️ **Adicione aqui 3 prints do app rodando no celular:**
-> Salve como `docs/assets/dashboard.png`, `docs/assets/calendar.png` e `docs/assets/analytics.png`
-
-<!--
 <div align="center">
   <img src="docs/assets/dashboard.png" width="250" alt="Dashboard com garrafa interativa" />
   &nbsp;&nbsp;&nbsp;
@@ -38,7 +34,6 @@ Desborocoxando é um aplicativo web progressivo (PWA) para pessoas que desejam r
   &nbsp;&nbsp;&nbsp;
   <img src="docs/assets/analytics.png" width="250" alt="Gráficos de evolução" />
 </div>
--->
 
 ---
 
