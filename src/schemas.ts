@@ -7,7 +7,6 @@ import { z } from 'zod';
 
 export const MealSchema = z.object({
   id: z.string(),
-  hora: z.string(),
   descricao: z.string(),
   kcal: z.number().min(0),
 });

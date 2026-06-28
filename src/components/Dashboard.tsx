@@ -15,9 +15,9 @@ interface DashboardProps {
 }
 
 const CARD_CONFIGS: { key: 'meds' | 'care' | 'exercise'; label: string }[] = [
-  { key: 'meds', label: '💊 Remédios' },
-  { key: 'care', label: '🧴 Care' },
-  { key: 'exercise', label: '🏃 Exercício' },
+  { key: 'meds', label: 'Remédios' },
+  { key: 'care', label: 'Care' },
+  { key: 'exercise', label: 'Exercício' },
 ];
 
 export default function Dashboard({
@@ -60,11 +60,11 @@ export default function Dashboard({
 
   const handleAddMeal = () => {
     if (!newMealDesc.trim() || !newMealKcal) return;
+    const kcalNum = Math.max(0, Number(newMealKcal));
     const meal: Meal = {
       id: Date.now().toString(36) + Math.random().toString(36).substr(2),
-      hora: format(new Date(), 'HH:mm'),
       descricao: newMealDesc.trim(),
-      kcal: Number(newMealKcal),
+      kcal: kcalNum,
     };
     updateRecord({ meals: [...record.meals, meal] });
     setNewMealDesc('');
@@ -93,10 +93,22 @@ export default function Dashboard({
 
       {/* Card Água */}
       <div className="bg-white rounded-2xl p-4 mb-4 border border-[#cd8ea1]/30 shadow-sm">
-        <div className="grid grid-cols-[1fr_1.5fr] gap-4 items-center">
+        {/* Contador centralizado no topo */}
+        <div
+          className={`text-center w-full mb-4 text-2xl font-advent whitespace-nowrap ${
+            record.water > waterGoal
+              ? 'animate-pulse text-[#922d4d] font-bold'
+              : 'text-[#922d4d]'
+          }`}
+        >
+          {record.water} / {waterGoal} ml
+        </div>
+
+        {/* Linha inferior: garrafa + controles lado a lado */}
+        <div className="grid grid-cols-2 gap-4 items-center">
           {/* Garrafa SVG */}
           <div
-            className={`w-24 h-40 mx-auto relative ${
+            className={`w-24 h-full max-h-[120px] mx-auto relative ${
               isBottleAnimating ? 'animate-garrafa-balanco' : ''
             }`}
           >
@@ -106,7 +118,6 @@ export default function Dashboard({
                   <path d="M35,32 L35,48 Q31,51 31,58 L31,152 Q31,168 50,168 Q69,168 69,152 L69,58 Q69,51 65,48 L65,32 Z" />
                 </clipPath>
               </defs>
-              {/* Água (preenchimento dinâmico) */}
               <rect
                 x="28"
                 y={fillY}
@@ -116,7 +127,6 @@ export default function Dashboard({
                 clipPath={`url(#${clipId})`}
                 className="transition-all duration-500 ease-in-out"
               />
-              {/* Contorno da garrafa */}
               <path
                 d="M35,32 L35,48 Q31,51 31,58 L31,152 Q31,168 50,168 Q69,168 69,152 L69,58 Q69,51 65,48 L65,32 Z"
                 fill="none"
@@ -124,40 +134,15 @@ export default function Dashboard({
                 strokeWidth="3"
                 strokeLinejoin="round"
               />
-              {/* Tampa */}
-              <rect
-                x="34"
-                y="16"
-                width="32"
-                height="18"
-                rx="5"
-                fill="#c47590"
-              />
-              <line
-                x1="40"
-                y1="21"
-                x2="60"
-                y2="21"
-                stroke="#f7e1e3"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
+              <rect x="34" y="16" width="32" height="18" rx="5" fill="#c47590" />
+              <line x1="40" y1="21" x2="60" y2="21" stroke="#f7e1e3" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </div>
 
           {/* Controles Água */}
           <div className="flex flex-col justify-center gap-3">
-            <div
-              className={`text-[#922d4d] text-xl sm:text-2xl font-advent whitespace-nowrap ${
-                record.water > waterGoal
-                  ? 'animate-pulse text-[#922d4d] font-bold'
-                  : ''
-              }`}
-            >
-              {record.water} / {waterGoal} ml
-            </div>
             {[100, 300, 500].map((ml) => (
-              <div key={ml} className="flex items-center justify-between w-full max-w-[160px] mx-auto mb-3 bg-[#f7e1e3]/30 rounded-full p-1">
+              <div key={ml} className="flex items-center justify-between w-full max-w-[160px] mx-auto bg-[#f7e1e3]/30 rounded-full p-1">
                 <button
                   type="button"
                   onClick={() => handleWaterChange(-ml)}
@@ -190,7 +175,7 @@ export default function Dashboard({
             className="bg-white p-4 rounded-2xl shadow-sm shadow-[#922d4d]/5 mb-3"
           >
             <div className="flex justify-between items-center">
-              <span className="text-sm font-semibold text-[#922d4d]">
+              <span className="uppercase text-xs font-bold tracking-wider text-[#922d4d]">
                 {label}
               </span>
               {/* Switch minimalista */}
@@ -234,10 +219,38 @@ export default function Dashboard({
         );
       })}
 
+      {/* Card Peso */}
+      <div className="bg-white rounded-2xl shadow-sm shadow-[#922d4d]/5 p-4 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <Scale className="w-5 h-5 text-[#cd8ea1]" />
+          <span className="uppercase text-xs font-bold tracking-wider text-[#922d4d]">
+            Peso de Hoje
+          </span>
+        </div>
+        <div className="flex items-center gap-1">
+          <input
+            type="number"
+            step="0.1"
+            min="0"
+            placeholder="0.0"
+            value={record.weight ?? ''}
+            onChange={(e) => {
+              const val = e.target.value;
+              if (val && parseFloat(val) < 0) return; // impede negativo
+              updateRecord({
+                weight: val ? parseFloat(val) : null,
+              });
+            }}
+            className="w-20 p-2 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#c47590] focus:ring-1 focus:ring-[#c47590] focus:outline-none text-sm text-right transition-all"
+          />
+          <span className="text-sm text-[#922d4d] font-medium">kg</span>
+        </div>
+      </div>
+
       {/* Card Refeições */}
       <div className="bg-white rounded-2xl p-5 shadow-sm shadow-[#922d4d]/5 mb-20">
-        <h3 className="text-sm font-semibold text-[#922d4d] mb-4">
-          🍽️ Refeições
+        <h3 className="uppercase text-xs font-bold tracking-wider text-[#922d4d] mb-4">
+          Refeições
         </h3>
 
         {/* Formulário inline */}
@@ -251,6 +264,7 @@ export default function Dashboard({
           />
           <input
             type="number"
+            min="0"
             value={newMealKcal}
             onChange={(e) => setNewMealKcal(e.target.value)}
             placeholder="kcal"
@@ -288,7 +302,7 @@ export default function Dashboard({
                 className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0"
               >
                 <span className="text-sm text-[#922d4d]">
-                  [{meal.hora}] {meal.descricao} - {meal.kcal} kcal
+                  {meal.descricao} - {meal.kcal} kcal
                 </span>
                 <button
                   type="button"
@@ -308,33 +322,6 @@ export default function Dashboard({
         </div>
       </div>
 
-      {/* Card Peso */}
-      <div className="bg-white rounded-2xl shadow-sm shadow-[#922d4d]/5 p-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <Scale className="w-5 h-5 text-[#cd8ea1]" />
-          <span className="text-sm font-semibold text-[#922d4d]">
-            Peso de Hoje
-          </span>
-        </div>
-        <div className="flex items-center gap-1">
-          <input
-            type="number"
-            step="0.1"
-            min="0"
-            placeholder="0.0"
-            value={record.weight ?? ''}
-            onChange={(e) => {
-              const val = e.target.value;
-              if (val && parseFloat(val) < 0) return; // impede negativo
-              updateRecord({
-                weight: val ? parseFloat(val) : null,
-              });
-            }}
-            className="w-20 p-2 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#c47590] focus:ring-1 focus:ring-[#c47590] focus:outline-none text-sm text-right transition-all"
-          />
-          <span className="text-sm text-[#922d4d] font-medium">kg</span>
-        </div>
-      </div>
     </div>
   );
 }

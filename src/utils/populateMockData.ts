@@ -67,7 +67,6 @@ function generateMeal(date: Date): Meal {
   );
   return {
     id: `m_${format(date, 'yyyyMMdd')}_${time}_${randomInt(100, 999)}`,
-    hora: time,
     descricao: randomPick(MEAL_DESCRIPTIONS),
     kcal: randomInt(150, 800),
   };
@@ -129,7 +128,6 @@ export function generateMockData(): AppDatabase {
     // Refeições: 1-4 por dia
     const mealCount = randomInt(1, 4);
     const meals: Meal[] = Array.from({ length: mealCount }, () => generateMeal(date));
-    meals.sort((a, b) => a.hora.localeCompare(b.hora));
 
     const record: DailyRecord = {
       date: dateKey,

@@ -1,6 +1,5 @@
 export interface Meal {
   id: string;       // timestamp ou uuid
-  hora: string;     // "HH:mm"
   descricao: string;
   kcal: number;
 }
