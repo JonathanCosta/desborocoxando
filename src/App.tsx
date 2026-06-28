@@ -31,7 +31,7 @@ function App() {
       {/* Header - Logo minimalista */}
       <header className="py-6 flex justify-center">
         <img
-          src="/logo-transparente.png"
+          src={`${import.meta.env.BASE_URL}logo-transparente.png`}
           alt="Desborocoxando"
           className="h-16 w-auto object-contain"
         />

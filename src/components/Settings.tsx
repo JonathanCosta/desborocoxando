@@ -171,7 +171,7 @@ export default function Settings({ populateMockData, settings, updateSettings }:
             className="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white rounded-t-3xl p-6 shadow-[0_-10px_25px_rgba(0,0,0,0.1)] z-50 transform transition-transform duration-500 translate-y-0"
           >
             <div className="flex justify-center mb-4">
-              <img src="/logo-transparente.png" alt="Desborocoxando" className="h-12 w-auto" />
+              <img src={`${import.meta.env.BASE_URL}logo-transparente.png`} alt="Desborocoxando" className="h-12 w-auto" />
             </div>
 
             {!isIOS ? (
